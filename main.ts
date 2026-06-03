@@ -222,7 +222,7 @@ let index = 0
 let bonusPoints = 25
 let answers: string[] = []
 let multipleChoice: string[][] = []
-let time = 10
+let time = 30
 questions = [
     "Which letter represents horizontal (sideways) position or movement? (Enter the option)", 
     "Which letter represents vertical (up & down) position or movement? (Enter the option)",
@@ -296,7 +296,7 @@ for (let i = 0; i < questions.length; i++) {
 
 info.startCountdown(time)
 let password_entry = game.askForNumber("Enter the password", 6)
-let Password = 123456
+let Password = 131815
 if (password_entry != Password) {
     game.setGameOverMessage(false, "Incorrect Password")
     game.gameOver(false)
@@ -314,16 +314,23 @@ info.onCountdownEnd(function () {
 
     
     game.setDialogFrame(img` `)
-    game.showLongText(questionsWithChoices.removeAt(index), DialogLayout.Full)
-    pause(500)
-    Question = game.askForString("", 1)
+    let currentQuestion = questionsWithChoices.removeAt(index)
+    showQuestion(currentQuestion)
+    while (Question.toLowerCase() == 'e') {
+        showQuestion(currentQuestion)
+    }
     if (Question.toLowerCase() == answers.removeAt(index).toLowerCase()) {
         info.changeScoreBy(bonusPoints)
         game.splash("Great Job! +" + bonusPoints + ". Keep Going!")
-    } else {
+    }  else {
         game.splash("Sorry, that's incorrect :( Keep trying!")
     }
     info.startCountdown(time)
 })
 
+function showQuestion(q : string) {
+    game.showLongText(q, DialogLayout.Full)
+    pause(500)
+    Question = game.askForString("Press e to see the question again", 1)
+}
 
