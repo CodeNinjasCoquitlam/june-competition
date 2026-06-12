@@ -96,88 +96,266 @@ function createPlayers(numPlayers : number) {
     numPlayers_global = numPlayers
 }
 browserEvents.setKeyboardRepeatDefault(0, 5)
+let diag = Math.sqrt(2) / 4
+
 // Player 1 controls
 browserEvents.W.onEvent(browserEvents.KeyEvent.Repeat, function () {
     if (numPlayers_global > 0) {
-        mp.getPlayerSprite(mp.playerSelector(1)).y -= 1
+        let p_1 = mp.getPlayerSprite(mp.playerSelector(1))
+        if(browserEvents.A.isPressed()) {
+            p_1.y -= diag
+            p_1.x -= diag
+        }
+        else if (browserEvents.D.isPressed()) {
+            p_1.y -= diag
+            p_1.x += diag
+        }
+        else {
+            p_1.y -= 1
+        }
     }
 })
 browserEvents.A.onEvent(browserEvents.KeyEvent.Repeat, function () {
     if (numPlayers_global > 0) {
-        mp.getPlayerSprite(mp.playerSelector(1)).x -= 1
+        let p_1 = mp.getPlayerSprite(mp.playerSelector(1))
+        if (browserEvents.W.isPressed()) {
+            p_1.y -= diag
+            p_1.x -= diag
+        }
+        else if (browserEvents.S.isPressed()) {
+            p_1.y += diag
+            p_1.x -= diag
+        }
+        else {
+            p_1.x -= 1
+        }
     }
 })
 browserEvents.S.onEvent(browserEvents.KeyEvent.Repeat, function () {
     if (numPlayers_global > 0) {
-        mp.getPlayerSprite(mp.playerSelector(1)).y += 1
+        let p_1 = mp.getPlayerSprite(mp.playerSelector(1))
+        if (browserEvents.A.isPressed()) {
+            p_1.y += diag
+            p_1.x -= diag
+        }
+        else if (browserEvents.D.isPressed()) {
+            p_1.y += diag
+            p_1.x += diag
+        }
+        else {
+            p_1.y += 1
+        }
     }
 })
 browserEvents.D.onEvent(browserEvents.KeyEvent.Repeat, function () {
     if (numPlayers_global > 0) {
-        mp.getPlayerSprite(mp.playerSelector(1)).x += 1
+        let p_1 = mp.getPlayerSprite(mp.playerSelector(1))
+        if (browserEvents.W.isPressed()) {
+            p_1.y -= diag
+            p_1.x += diag
+        }
+        else if (browserEvents.S.isPressed()) {
+            p_1.y += diag
+            p_1.x += diag
+        }
+        else {
+            p_1.x += 1
+        }
     }
 })
 
 browserEvents.ArrowUp.onEvent(browserEvents.KeyEvent.Repeat, function () {
     if (numPlayers_global > 1) {
-        mp.getPlayerSprite(mp.playerSelector(2)).y -= 1
+        let p = mp.getPlayerSprite(mp.playerSelector(2))
+        if (browserEvents.ArrowLeft.isPressed()) {
+            p.y -= diag
+            p.x -= diag
+        }
+        else if (browserEvents.ArrowRight.isPressed()) {
+            p.y -= diag
+            p.x += diag
+        }
+        else {
+            p.y -= 1
+        }
     }
 })
 browserEvents.ArrowLeft.onEvent(browserEvents.KeyEvent.Repeat, function () {
     if (numPlayers_global > 1) {
-        mp.getPlayerSprite(mp.playerSelector(2)).x -= 1
+        let p = mp.getPlayerSprite(mp.playerSelector(2))
+        if (browserEvents.ArrowUp.isPressed()) {
+            p.y -= diag
+            p.x -= diag
+        }
+        else if (browserEvents.ArrowDown.isPressed()) {
+            p.y += diag
+            p.x -= diag
+        }
+        else {
+            p.x -= 1
+        }
     }
 })
 browserEvents.ArrowDown.onEvent(browserEvents.KeyEvent.Repeat, function () {
     if (numPlayers_global > 1) {
-        mp.getPlayerSprite(mp.playerSelector(2)).y += 1
+        let p = mp.getPlayerSprite(mp.playerSelector(2))
+        if (browserEvents.ArrowRight.isPressed()) {
+            p.y += diag
+            p.x += diag
+        }
+        else if (browserEvents.ArrowLeft.isPressed()) {
+            p.y += diag
+            p.x -= diag
+        }
+        else {
+            p.y += 1
+        }
     }
 })
 browserEvents.ArrowRight.onEvent(browserEvents.KeyEvent.Repeat, function () {
     if (numPlayers_global > 1) {
-        mp.getPlayerSprite(mp.playerSelector(2)).x += 1
+        let p = mp.getPlayerSprite(mp.playerSelector(2))
+        if (browserEvents.ArrowUp.isPressed()) {
+            p.y -= diag
+            p.x += diag
+        }
+        else if (browserEvents.ArrowDown.isPressed()) {
+            p.y += diag
+            p.x += diag
+        }
+        else {
+            p.x += 1
+        }
     }
 })
 
 browserEvents.I.onEvent(browserEvents.KeyEvent.Repeat, function () {
     if (numPlayers_global > 2) {
-        mp.getPlayerSprite(mp.playerSelector(3)).y -= 1
+        let p = mp.getPlayerSprite(mp.playerSelector(3))
+        if (browserEvents.J.isPressed()) {
+            p.y -= diag
+            p.x -= diag
+        }
+        else if (browserEvents.L.isPressed()) {
+            p.y -= diag
+            p.x += diag
+        }
+        else {
+            p.y -= 1
+        }
     }
 })
 browserEvents.J.onEvent(browserEvents.KeyEvent.Repeat, function () {
     if (numPlayers_global > 2) {
-        mp.getPlayerSprite(mp.playerSelector(3)).x -= 1
+        let p = mp.getPlayerSprite(mp.playerSelector(3))
+        if (browserEvents.I.isPressed()) {
+            p.y -= diag
+            p.x -= diag
+        }
+        else if (browserEvents.K.isPressed()) {
+            p.y += diag
+            p.x -= diag
+        }
+        else {
+            p.x -= 1
+        }
     }
 })
 browserEvents.K.onEvent(browserEvents.KeyEvent.Repeat, function () {
     if (numPlayers_global > 2) {
-        mp.getPlayerSprite(mp.playerSelector(3)).y += 1
+        let p = mp.getPlayerSprite(mp.playerSelector(3))
+        if (browserEvents.J.isPressed()) {
+            p.y += diag
+            p.x -= diag
+        }
+        else if (browserEvents.L.isPressed()) {
+            p.y += diag
+            p.x += diag
+        }
+        else {
+            p.y += 1
+        }
     }
 })
 browserEvents.L.onEvent(browserEvents.KeyEvent.Repeat, function () {
     if (numPlayers_global > 2) {
-        mp.getPlayerSprite(mp.playerSelector(3)).x += 1
+        let p = mp.getPlayerSprite(mp.playerSelector(3))
+        if (browserEvents.I.isPressed()) {
+            p.y -= diag
+            p.x += diag
+        }
+        else if (browserEvents.K.isPressed()) {
+            p.y += diag
+            p.x += diag
+        }
+        else {
+            p.x += 1
+        }
     }
 })
 
 browserEvents.Eight.onEvent(browserEvents.KeyEvent.Repeat, function () {
     if (numPlayers_global > 3) {
-        mp.getPlayerSprite(mp.playerSelector(4)).y -= 1
+        let p = mp.getPlayerSprite(mp.playerSelector(4))
+        if (browserEvents.Four.isPressed()) {
+            p.y -= diag
+            p.x -= diag
+        }
+        else if (browserEvents.Six.isPressed()) {
+            p.y -= diag
+            p.x += diag
+        }
+        else {
+            p.y -= 1
+        }
     }
 })
 browserEvents.Four.onEvent(browserEvents.KeyEvent.Repeat, function () {
     if (numPlayers_global > 3) {
-        mp.getPlayerSprite(mp.playerSelector(4)).x -= 1
+        let p = mp.getPlayerSprite(mp.playerSelector(4))
+        if (browserEvents.Eight.isPressed()) {
+            p.y -= diag
+            p.x -= diag
+        }
+        else if (browserEvents.Five.isPressed()) {
+            p.y += diag
+            p.x -= diag
+        }
+        else {
+            p.x -= 1
+        }
     }
 })
 browserEvents.Five.onEvent(browserEvents.KeyEvent.Repeat, function () {
     if (numPlayers_global > 3) {
-        mp.getPlayerSprite(mp.playerSelector(4)).y += 1
+        let p = mp.getPlayerSprite(mp.playerSelector(4))
+        if (browserEvents.Four.isPressed()) {
+            p.y += diag
+            p.x -= diag
+        }
+        else if (browserEvents.Six.isPressed()) {
+            p.y += diag
+            p.x += diag
+        }
+        else {
+            p.y += 1
+        }
     }
 })
 browserEvents.Six.onEvent(browserEvents.KeyEvent.Repeat, function () {
     if (numPlayers_global > 3) {
-        mp.getPlayerSprite(mp.playerSelector(4)).x += 1
+        let p = mp.getPlayerSprite(mp.playerSelector(4))
+        if (browserEvents.Eight.isPressed()) {
+            p.y -= diag
+            p.x += diag
+        }
+        else if (browserEvents.Five.isPressed()) {
+            p.y += diag
+            p.x += diag
+        }
+        else {
+            p.x += 1
+        }
     }
 })
 
