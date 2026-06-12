@@ -3,27 +3,192 @@
 namespace SpriteKind {
     export const Bonus = SpriteKind.create()
 }
-let mySprite = sprites.create(img`
-    . . . . f f f f . . . . .
-    . . f f f f f f f f . . .
-    . f f f f f f c f f f . .
-    f f f f f f c c f f f c .
-    f f f c f f f f f f f c .
-    c c c f f f e e f f c c .
-    f f f f f e e f f c c f .
-    f f f b f e e f b f f f .
-    . f 4 1 f 4 4 f 1 4 f . .
-    . f e 4 4 4 4 4 4 e f . .
-    . f f f e e e e f f f . .
-    f e f b 7 7 7 7 b f e f .
-    e 4 f 7 7 7 7 7 7 f 4 e .
-    e e f 6 6 6 6 6 6 f e e .
-    . . . f f f f f f . . . .
-    . . . f f . . f f . . . .
-`, SpriteKind.Player)
-controller.moveSprite(mySprite)
-mySprite.setStayInScreen(true)
-info.setScore(0)
+let p1 = img`
+    . . . . . . . . . . . . . . . .
+    . . . . . . . . . . b 5 b . . .
+    . . . . . . . . . b 5 b . . . .
+    . . . . . . b b b b b b . . . .
+    . . . . . b b 5 5 5 5 5 b . . .
+    . b b b b b 5 5 5 5 5 5 5 b . .
+    . b d 5 b 5 5 5 5 5 5 5 5 b . .
+    . . b 5 5 b 5 d 1 f 5 d 4 f . .
+    . . b d 5 5 b 1 f f 5 4 4 c . .
+    b b d b 5 5 5 d f b 4 4 4 4 4 b
+    b d d c d 5 5 b 5 4 4 4 4 4 b .
+    c d d d c c b 5 5 5 5 5 5 5 b .
+    c b d d d d d 5 5 5 5 5 5 5 b .
+    . c d d d d d d 5 5 5 5 5 d b .
+    . . c b d d d d d 5 5 5 b b . .
+    . . . c c c c c c c c b b . . .
+`
+let p2 = img`
+    . . . . . . f f f f . . . . . .
+    . . . . f f f 2 2 f f f . . . .
+    . . . f f f 2 2 2 2 f f f . . .
+    . . f f f e e e e e e f f f . .
+    . . f f e 2 2 2 2 2 2 e e f . .
+    . . f e 2 f f f f f f 2 e f . .
+    . . f f f f e e e e f f f f . .
+    . f f e f b f 4 4 f b f e f f .
+    . f e e 4 1 f d d f 1 4 e e f .
+    . . f e e d d d d d d e e f . .
+    . . . f e e 4 4 4 4 e e f . . .
+    . . e 4 f 2 2 2 2 2 2 f 4 e . .
+    . . 4 d f 2 2 2 2 2 2 f d 4 . .
+    . . 4 4 f 4 4 5 5 4 4 f 4 4 . .
+    . . . . . f f f f f f . . . . .
+    . . . . . f f . . f f . . . . .
+`
+let p3 = img`
+    ........................
+    ........................
+    ........................
+    ........................
+    ..........ffff..........
+    ........ff1111ff........
+    .......fb111111bf.......
+    .......f11111111f.......
+    ......fd11111111df......
+    ......fd11111111df......
+    ......fddd1111dddf......
+    ......fbdbfddfbdbf......
+    ......fcdcf11fcdcf......
+    .......fb111111bf.......
+    ......fffcdb1bdffff.....
+    ....fc111cbfbfc111cf....
+    ....f1b1b1ffff1b1b1f....
+    ....fbfbffffffbfbfbf....
+    .........ffffff.........
+    ...........fff..........
+    ........................
+    ........................
+    ........................
+    ........................
+`
+let p4 = img`
+    . . . . f f f f f . . . . . . .
+    . . . f e e e e e f . . . . . .
+    . . f d d d d e e e f . . . . .
+    . c d f d d f d e e f f . . . .
+    . c d f d d f d e e d d f . . .
+    c d e e d d d d e e b d c . . .
+    c d d d d c d d e e b d c . . .
+    c c c c c d d e e e f c . . . .
+    . f d d d d e e e f f . . . . .
+    . . f f f f f e e e e f . . . .
+    . . . . f f e e e e e e f . f f
+    . . . f e e f e e f e e f . e f
+    . . f e e f e e f e e e f . e f
+    . f b d f d b f b b f e f f e f
+    . f d d f d d f d d b e f f f f
+    . . f f f f f f f f f f f f f .
+`
+let numPlayers_global = 0
+function createPlayers(numPlayers : number) {
+    let player_images = [p1, p2, p3, p4]
+    // Player 1 
+    for (let i = 0; i < numPlayers; i++) {
+        let player: Sprite
+        mp.setPlayerSprite(mp.playerSelector(i + 1), player = sprites.create(player_images[i], SpriteKind.Player))
+        //mp.moveWithButtons(mp.playerSelector(i + 1))
+
+    }
+    numPlayers_global = numPlayers
+}
+browserEvents.setKeyboardRepeatDefault(0, 5)
+// Player 1 controls
+browserEvents.W.onEvent(browserEvents.KeyEvent.Repeat, function () {
+    if (numPlayers_global > 0) {
+        mp.getPlayerSprite(mp.playerSelector(1)).y -= 1
+    }
+})
+browserEvents.A.onEvent(browserEvents.KeyEvent.Repeat, function () {
+    if (numPlayers_global > 0) {
+        mp.getPlayerSprite(mp.playerSelector(1)).x -= 1
+    }
+})
+browserEvents.S.onEvent(browserEvents.KeyEvent.Repeat, function () {
+    if (numPlayers_global > 0) {
+        mp.getPlayerSprite(mp.playerSelector(1)).y += 1
+    }
+})
+browserEvents.D.onEvent(browserEvents.KeyEvent.Repeat, function () {
+    if (numPlayers_global > 0) {
+        mp.getPlayerSprite(mp.playerSelector(1)).x += 1
+    }
+})
+
+browserEvents.ArrowUp.onEvent(browserEvents.KeyEvent.Repeat, function () {
+    if (numPlayers_global > 1) {
+        mp.getPlayerSprite(mp.playerSelector(2)).y -= 1
+    }
+})
+browserEvents.ArrowLeft.onEvent(browserEvents.KeyEvent.Repeat, function () {
+    if (numPlayers_global > 1) {
+        mp.getPlayerSprite(mp.playerSelector(2)).x -= 1
+    }
+})
+browserEvents.ArrowDown.onEvent(browserEvents.KeyEvent.Repeat, function () {
+    if (numPlayers_global > 1) {
+        mp.getPlayerSprite(mp.playerSelector(2)).y += 1
+    }
+})
+browserEvents.ArrowRight.onEvent(browserEvents.KeyEvent.Repeat, function () {
+    if (numPlayers_global > 1) {
+        mp.getPlayerSprite(mp.playerSelector(2)).x += 1
+    }
+})
+
+browserEvents.I.onEvent(browserEvents.KeyEvent.Repeat, function () {
+    if (numPlayers_global > 2) {
+        mp.getPlayerSprite(mp.playerSelector(3)).y -= 1
+    }
+})
+browserEvents.J.onEvent(browserEvents.KeyEvent.Repeat, function () {
+    if (numPlayers_global > 2) {
+        mp.getPlayerSprite(mp.playerSelector(3)).x -= 1
+    }
+})
+browserEvents.K.onEvent(browserEvents.KeyEvent.Repeat, function () {
+    if (numPlayers_global > 2) {
+        mp.getPlayerSprite(mp.playerSelector(3)).y += 1
+    }
+})
+browserEvents.L.onEvent(browserEvents.KeyEvent.Repeat, function () {
+    if (numPlayers_global > 2) {
+        mp.getPlayerSprite(mp.playerSelector(3)).x += 1
+    }
+})
+
+browserEvents.Eight.onEvent(browserEvents.KeyEvent.Repeat, function () {
+    if (numPlayers_global > 3) {
+        mp.getPlayerSprite(mp.playerSelector(4)).y -= 1
+    }
+})
+browserEvents.Four.onEvent(browserEvents.KeyEvent.Repeat, function () {
+    if (numPlayers_global > 3) {
+        mp.getPlayerSprite(mp.playerSelector(4)).x -= 1
+    }
+})
+browserEvents.Five.onEvent(browserEvents.KeyEvent.Repeat, function () {
+    if (numPlayers_global > 3) {
+        mp.getPlayerSprite(mp.playerSelector(4)).y += 1
+    }
+})
+browserEvents.Six.onEvent(browserEvents.KeyEvent.Repeat, function () {
+    if (numPlayers_global > 3) {
+        mp.getPlayerSprite(mp.playerSelector(4)).x += 1
+    }
+})
+
+createPlayers(4)
+
+
+for (let player of sprites.allOfKind(SpriteKind.Player)) {
+    player.setStayInScreen(true)
+    mp.setPlayerState(mp.getPlayerBySprite(player), MultiplayerState.score, 0)
+}
+//info.setScore(0)
 scene.setBackgroundColor(10)
 game.setDialogFrame(img`
     8888.....88....888....88.88....888....888...8888
@@ -186,31 +351,30 @@ game.onUpdateInterval(300, function () {
 })
 
 
-
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Bonus, function (sprite, otherSprite) {
+    sprites
     sprites.destroy(otherSprite)
-    info.changeScoreBy(10)
-    specialScore(5, sprite.x, sprite.y, 500)
+    specialScore(sprite, 5, 500)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
     sprites.destroy(otherSprite)
-    info.changeScoreBy(1)
-    specialScore(1, sprite.x, sprite.y, 250)
+    specialScore(sprite, 1, 250)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
     sprites.destroy(otherSprite)
-    specialScore(-20, sprite.x, sprite.y, 1000)
+    specialScore(sprite, -20, 1000)
 })
 let mySprite2: Sprite = null
 let textSprite: TextSprite = null
 
-function specialScore(points: number, posX: number, posY: number, dur: number) {
+function specialScore(sprite : Sprite, points: number, dur: number) {
     let pointsString = points.toString()
     if (points > 0) pointsString = "+" + points.toString()
     textSprite = textsprite.create(pointsString)
-    textSprite.setPosition(posX, posY)
+    textSprite.setPosition(sprite.x, sprite.y)
     textSprite.lifespan = dur
-    info.changeScoreBy(points)
+    mp.changePlayerStateBy(mp.playerSelector(mp.getPlayerProperty(mp.getPlayerBySprite(sprite), mp.PlayerProperty.Number)), MultiplayerState.score, points)
+
 }
 //
 
