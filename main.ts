@@ -101,65 +101,65 @@ let diag = Math.sqrt(2) / 4
 // Player 1 controls
 browserEvents.W.onEvent(browserEvents.KeyEvent.Repeat, function () {
     if (numPlayers_global > 0) {
-        let p_1 = mp.getPlayerSprite(mp.playerSelector(1))
+        let p = mp.getPlayerSprite(mp.playerSelector(1))
         if(browserEvents.A.isPressed()) {
-            p_1.y -= diag
-            p_1.x -= diag
+            p.y -= diag
+            p.x -= diag
         }
         else if (browserEvents.D.isPressed()) {
-            p_1.y -= diag
-            p_1.x += diag
+            p.y -= diag
+            p.x += diag
         }
         else {
-            p_1.y -= 1
+            p.y -= 1
         }
     }
 })
 browserEvents.A.onEvent(browserEvents.KeyEvent.Repeat, function () {
     if (numPlayers_global > 0) {
-        let p_1 = mp.getPlayerSprite(mp.playerSelector(1))
+        let p = mp.getPlayerSprite(mp.playerSelector(1))
         if (browserEvents.W.isPressed()) {
-            p_1.y -= diag
-            p_1.x -= diag
+            p.y -= diag
+            p.x -= diag
         }
         else if (browserEvents.S.isPressed()) {
-            p_1.y += diag
-            p_1.x -= diag
+            p.y += diag
+            p.x -= diag
         }
         else {
-            p_1.x -= 1
+            p.x -= 1
         }
     }
 })
 browserEvents.S.onEvent(browserEvents.KeyEvent.Repeat, function () {
     if (numPlayers_global > 0) {
-        let p_1 = mp.getPlayerSprite(mp.playerSelector(1))
+        let p = mp.getPlayerSprite(mp.playerSelector(1))
         if (browserEvents.A.isPressed()) {
-            p_1.y += diag
-            p_1.x -= diag
+            p.y += diag
+            p.x -= diag
         }
         else if (browserEvents.D.isPressed()) {
-            p_1.y += diag
-            p_1.x += diag
+            p.y += diag
+            p.x += diag
         }
         else {
-            p_1.y += 1
+            p.y += 1
         }
     }
 })
 browserEvents.D.onEvent(browserEvents.KeyEvent.Repeat, function () {
     if (numPlayers_global > 0) {
-        let p_1 = mp.getPlayerSprite(mp.playerSelector(1))
+        let p = mp.getPlayerSprite(mp.playerSelector(1))
         if (browserEvents.W.isPressed()) {
-            p_1.y -= diag
-            p_1.x += diag
+            p.y -= diag
+            p.x += diag
         }
         else if (browserEvents.S.isPressed()) {
-            p_1.y += diag
-            p_1.x += diag
+            p.y += diag
+            p.x += diag
         }
         else {
-            p_1.x += 1
+            p.x += 1
         }
     }
 })
