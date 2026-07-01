@@ -83,6 +83,11 @@ let p4 = img`
     . f d d f d d f d d b e f f f f
     . . f f f f f f f f f f f f f .
 `
+
+// NOTE: only supports 1 player so far,
+// Can do up to 4-players but question logic not finished 
+// for multiplayer
+
 let numPlayers_global = 0
 function createPlayers(numPlayers : number) {
     let player_images = [p1, p2, p3, p4]
@@ -90,277 +95,12 @@ function createPlayers(numPlayers : number) {
     for (let i = 0; i < numPlayers; i++) {
         let player: Sprite
         mp.setPlayerSprite(mp.playerSelector(i + 1), player = sprites.create(player_images[i], SpriteKind.Player))
-        //mp.moveWithButtons(mp.playerSelector(i + 1))
+        mp.moveWithButtons(mp.playerSelector(i + 1))
 
     }
     numPlayers_global = numPlayers
 }
-browserEvents.setKeyboardRepeatDefault(0, 5)
-let diag = Math.sqrt(2) / 4
-
-// Player 1 controls
-browserEvents.W.onEvent(browserEvents.KeyEvent.Repeat, function () {
-    if (numPlayers_global > 0) {
-        let p = mp.getPlayerSprite(mp.playerSelector(1))
-        if(browserEvents.A.isPressed()) {
-            p.y -= diag
-            p.x -= diag
-        }
-        else if (browserEvents.D.isPressed()) {
-            p.y -= diag
-            p.x += diag
-        }
-        else {
-            p.y -= 1
-        }
-    }
-})
-browserEvents.A.onEvent(browserEvents.KeyEvent.Repeat, function () {
-    if (numPlayers_global > 0) {
-        let p = mp.getPlayerSprite(mp.playerSelector(1))
-        if (browserEvents.W.isPressed()) {
-            p.y -= diag
-            p.x -= diag
-        }
-        else if (browserEvents.S.isPressed()) {
-            p.y += diag
-            p.x -= diag
-        }
-        else {
-            p.x -= 1
-        }
-    }
-})
-browserEvents.S.onEvent(browserEvents.KeyEvent.Repeat, function () {
-    if (numPlayers_global > 0) {
-        let p = mp.getPlayerSprite(mp.playerSelector(1))
-        if (browserEvents.A.isPressed()) {
-            p.y += diag
-            p.x -= diag
-        }
-        else if (browserEvents.D.isPressed()) {
-            p.y += diag
-            p.x += diag
-        }
-        else {
-            p.y += 1
-        }
-    }
-})
-browserEvents.D.onEvent(browserEvents.KeyEvent.Repeat, function () {
-    if (numPlayers_global > 0) {
-        let p = mp.getPlayerSprite(mp.playerSelector(1))
-        if (browserEvents.W.isPressed()) {
-            p.y -= diag
-            p.x += diag
-        }
-        else if (browserEvents.S.isPressed()) {
-            p.y += diag
-            p.x += diag
-        }
-        else {
-            p.x += 1
-        }
-    }
-})
-
-browserEvents.ArrowUp.onEvent(browserEvents.KeyEvent.Repeat, function () {
-    if (numPlayers_global > 1) {
-        let p = mp.getPlayerSprite(mp.playerSelector(2))
-        if (browserEvents.ArrowLeft.isPressed()) {
-            p.y -= diag
-            p.x -= diag
-        }
-        else if (browserEvents.ArrowRight.isPressed()) {
-            p.y -= diag
-            p.x += diag
-        }
-        else {
-            p.y -= 1
-        }
-    }
-})
-browserEvents.ArrowLeft.onEvent(browserEvents.KeyEvent.Repeat, function () {
-    if (numPlayers_global > 1) {
-        let p = mp.getPlayerSprite(mp.playerSelector(2))
-        if (browserEvents.ArrowUp.isPressed()) {
-            p.y -= diag
-            p.x -= diag
-        }
-        else if (browserEvents.ArrowDown.isPressed()) {
-            p.y += diag
-            p.x -= diag
-        }
-        else {
-            p.x -= 1
-        }
-    }
-})
-browserEvents.ArrowDown.onEvent(browserEvents.KeyEvent.Repeat, function () {
-    if (numPlayers_global > 1) {
-        let p = mp.getPlayerSprite(mp.playerSelector(2))
-        if (browserEvents.ArrowRight.isPressed()) {
-            p.y += diag
-            p.x += diag
-        }
-        else if (browserEvents.ArrowLeft.isPressed()) {
-            p.y += diag
-            p.x -= diag
-        }
-        else {
-            p.y += 1
-        }
-    }
-})
-browserEvents.ArrowRight.onEvent(browserEvents.KeyEvent.Repeat, function () {
-    if (numPlayers_global > 1) {
-        let p = mp.getPlayerSprite(mp.playerSelector(2))
-        if (browserEvents.ArrowUp.isPressed()) {
-            p.y -= diag
-            p.x += diag
-        }
-        else if (browserEvents.ArrowDown.isPressed()) {
-            p.y += diag
-            p.x += diag
-        }
-        else {
-            p.x += 1
-        }
-    }
-})
-
-browserEvents.I.onEvent(browserEvents.KeyEvent.Repeat, function () {
-    if (numPlayers_global > 2) {
-        let p = mp.getPlayerSprite(mp.playerSelector(3))
-        if (browserEvents.J.isPressed()) {
-            p.y -= diag
-            p.x -= diag
-        }
-        else if (browserEvents.L.isPressed()) {
-            p.y -= diag
-            p.x += diag
-        }
-        else {
-            p.y -= 1
-        }
-    }
-})
-browserEvents.J.onEvent(browserEvents.KeyEvent.Repeat, function () {
-    if (numPlayers_global > 2) {
-        let p = mp.getPlayerSprite(mp.playerSelector(3))
-        if (browserEvents.I.isPressed()) {
-            p.y -= diag
-            p.x -= diag
-        }
-        else if (browserEvents.K.isPressed()) {
-            p.y += diag
-            p.x -= diag
-        }
-        else {
-            p.x -= 1
-        }
-    }
-})
-browserEvents.K.onEvent(browserEvents.KeyEvent.Repeat, function () {
-    if (numPlayers_global > 2) {
-        let p = mp.getPlayerSprite(mp.playerSelector(3))
-        if (browserEvents.J.isPressed()) {
-            p.y += diag
-            p.x -= diag
-        }
-        else if (browserEvents.L.isPressed()) {
-            p.y += diag
-            p.x += diag
-        }
-        else {
-            p.y += 1
-        }
-    }
-})
-browserEvents.L.onEvent(browserEvents.KeyEvent.Repeat, function () {
-    if (numPlayers_global > 2) {
-        let p = mp.getPlayerSprite(mp.playerSelector(3))
-        if (browserEvents.I.isPressed()) {
-            p.y -= diag
-            p.x += diag
-        }
-        else if (browserEvents.K.isPressed()) {
-            p.y += diag
-            p.x += diag
-        }
-        else {
-            p.x += 1
-        }
-    }
-})
-
-browserEvents.Eight.onEvent(browserEvents.KeyEvent.Repeat, function () {
-    if (numPlayers_global > 3) {
-        let p = mp.getPlayerSprite(mp.playerSelector(4))
-        if (browserEvents.Four.isPressed()) {
-            p.y -= diag
-            p.x -= diag
-        }
-        else if (browserEvents.Six.isPressed()) {
-            p.y -= diag
-            p.x += diag
-        }
-        else {
-            p.y -= 1
-        }
-    }
-})
-browserEvents.Four.onEvent(browserEvents.KeyEvent.Repeat, function () {
-    if (numPlayers_global > 3) {
-        let p = mp.getPlayerSprite(mp.playerSelector(4))
-        if (browserEvents.Eight.isPressed()) {
-            p.y -= diag
-            p.x -= diag
-        }
-        else if (browserEvents.Five.isPressed()) {
-            p.y += diag
-            p.x -= diag
-        }
-        else {
-            p.x -= 1
-        }
-    }
-})
-browserEvents.Five.onEvent(browserEvents.KeyEvent.Repeat, function () {
-    if (numPlayers_global > 3) {
-        let p = mp.getPlayerSprite(mp.playerSelector(4))
-        if (browserEvents.Four.isPressed()) {
-            p.y += diag
-            p.x -= diag
-        }
-        else if (browserEvents.Six.isPressed()) {
-            p.y += diag
-            p.x += diag
-        }
-        else {
-            p.y += 1
-        }
-    }
-})
-browserEvents.Six.onEvent(browserEvents.KeyEvent.Repeat, function () {
-    if (numPlayers_global > 3) {
-        let p = mp.getPlayerSprite(mp.playerSelector(4))
-        if (browserEvents.Eight.isPressed()) {
-            p.y -= diag
-            p.x += diag
-        }
-        else if (browserEvents.Five.isPressed()) {
-            p.y += diag
-            p.x += diag
-        }
-        else {
-            p.x += 1
-        }
-    }
-})
-
-createPlayers(4)
-
+createPlayers(1)
 
 for (let player of sprites.allOfKind(SpriteKind.Player)) {
     player.setStayInScreen(true)
@@ -421,12 +161,12 @@ game.setDialogFrame(img`
 game.showLongText("Eat all the fruits.\n Veggies are worth extra.\n Avoid the junk food!!\nAnswer the questions for bonus points!!!\nGood luck Ninja!", DialogLayout.Full)
 function invincibility (sprite: Sprite) {
     sprite.setFlag(SpriteFlag.Ghost, true)
-    timer.after(1000, function () {
+    timer.after(500, function () {
         sprite.setFlag(SpriteFlag.Ghost, false)
     })
 }
 
-game.onUpdateInterval(300, function () {
+game.onUpdateInterval(500, function () {
     if (Math.percentChance(25)) {
         mySprite2 = sprites.create(img`
             . . . . . . . 6 . . . . . . . . 
@@ -446,7 +186,9 @@ game.onUpdateInterval(300, function () {
             e e e 2 e e c e c c c . . . . . 
             . c c c c c c c . . . . . . . . 
             `, SpriteKind.Food)
-    } else if (Math.percentChance(25)) {
+        mySprite2.setPosition(randint(0, 160), randint(0, 120))
+    } 
+    if (Math.percentChance(25)) {
         mySprite2 = sprites.create(img`
             . . . . . . . e c 7 . . . . . . 
             . . . . e e e c 7 7 e e . . . . 
@@ -465,7 +207,9 @@ game.onUpdateInterval(300, function () {
             . . . 2 2 e e 4 4 4 2 e e . . . 
             . . . . . 2 2 e e e e . . . . . 
             `, SpriteKind.Food)
-    } else if (Math.percentChance(25)) {
+        mySprite2.setPosition(randint(0, 160), randint(0, 120))
+    } 
+    if (Math.percentChance(25)) {
         mySprite2 = sprites.create(img`
             4 4 4 . . 4 4 4 4 4 . . . . . . 
             4 5 5 4 4 5 5 5 5 5 4 4 . . . . 
@@ -484,7 +228,9 @@ game.onUpdateInterval(300, function () {
             . . . . c c b 4 4 4 b b 4 5 4 4 
             . . . . . . c c c c c c b b 4 . 
             `, SpriteKind.Food)
-    } else if (Math.percentChance(15)) {
+        mySprite2.setPosition(randint(0, 160), randint(0, 120))
+    }
+    if (Math.percentChance(15)) {
         mySprite2 = sprites.create(img`
             . . . . . 3 3 b 3 3 d d 3 3 . . 
             . . . . 3 1 1 d 3 d 1 1 1 1 3 . 
@@ -505,7 +251,9 @@ game.onUpdateInterval(300, function () {
             `, SpriteKind.Enemy)
         mySprite2.lifespan = 5000
         invincibility(mySprite2)
-    } else {
+        mySprite2.setPosition(randint(0, 160), randint(0, 120))
+    } 
+    if (Math.percentChance(15)) {
         mySprite2 = sprites.create(img`
             . . . . . . . . . . . . . . . . 
             . . . . . . f . f . . . . . . . 
@@ -524,13 +272,14 @@ game.onUpdateInterval(300, function () {
             . . f f f . . . . . . . . . . . 
             . . . . . . . . . . . . . . . . 
             `, SpriteKind.Bonus)
+        mySprite2.setPosition(randint(0, 160), randint(0, 120))
     }
-    mySprite2.setPosition(randint(0, 160), randint(0, 120))
 })
 
 
+
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Bonus, function (sprite, otherSprite) {
-    sprites
+    music.play(music.melodyPlayable(music.baDing), music.PlaybackMode.InBackground)
     sprites.destroy(otherSprite)
     specialScore(sprite, 5, 500)
 })
@@ -539,6 +288,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSpr
     specialScore(sprite, 1, 250)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
+    music.play(music.melodyPlayable(music.smallCrash), music.PlaybackMode.InBackground)
     sprites.destroy(otherSprite)
     specialScore(sprite, -20, 1000)
 })
@@ -575,10 +325,7 @@ questions = [
     "What is an event in coding?",
     "What does a loop do?",
     "What is a sequence?",
-    "Why is the order of code important?",
-    "Which of these is an example of an input in a game?",
-    "What is a variable used for in coding?",
-    "What is debugging?"
+    "Why is the order of code important?"
             ]
 multipleChoice = [
     ["x", "y", "z", "h"],
@@ -591,10 +338,8 @@ multipleChoice = [
     ["Repeats code multiple times", "Stops the program", "Changes the background colour", "Starts the game"],
     ["Steps or instructions in a certain order", "Blocks of code", "The start of the game"],
     ["It might change how the program works", "It isn't", "It makes the computer faster", "It makes coding harder"],
-    ["Pressing the space bar", "The score increasing", "A sprite moving automatically", "Adding background music"],
-    ["To store information", "To draw pictures", "To close the game", "To install software"],
-    ["Finding and fixing mistakes in code","Decorating a game", "Uploading a game online", "Playing games with friends"]
     ]
+
 function shuffle(arr: string[]) {
     let shuffled : string[] = []
     let answerMoved = false;
@@ -676,3 +421,15 @@ function showQuestion(q : string) {
     Question = game.askForString("Press e to see the question again", 1)
 }
 
+// Ignore for now, trying to make more exciting answer selection
+function goToQuestion(q : string) {
+    scene.setBackgroundColor(4)
+    let options = ["A", "B", "C", "D"]
+    let positionsX = [40, 120, 120, 40]
+    let positionsY = [30, 30, 90, 90]
+    for (let i = 0; i < 4; i++) {
+        let button = textsprite.create(options[i])
+        button.setPosition(positionsX[i], positionsY[i])
+        button.setScale(2)
+    }
+}
