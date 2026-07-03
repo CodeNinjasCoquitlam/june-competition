@@ -4,22 +4,22 @@ namespace SpriteKind {
     export const Bonus = SpriteKind.create()
 }
 let p1 = img`
-    . . . . . . . . . . . . . . . .
-    . . . . . . . . . . b 5 b . . .
-    . . . . . . . . . b 5 b . . . .
-    . . . . . . b b b b b b . . . .
-    . . . . . b b 5 5 5 5 5 b . . .
-    . b b b b b 5 5 5 5 5 5 5 b . .
-    . b d 5 b 5 5 5 5 5 5 5 5 b . .
-    . . b 5 5 b 5 d 1 f 5 d 4 f . .
-    . . b d 5 5 b 1 f f 5 4 4 c . .
-    b b d b 5 5 5 d f b 4 4 4 4 4 b
-    b d d c d 5 5 b 5 4 4 4 4 4 b .
-    c d d d c c b 5 5 5 5 5 5 5 b .
-    c b d d d d d 5 5 5 5 5 5 5 b .
-    . c d d d d d d 5 5 5 5 5 d b .
-    . . c b d d d d d 5 5 5 b b . .
-    . . . c c c c c c c c b b . . .
+    . . . . . . f f f f f . . . . .
+    . . . . . f f f f f f f . . . .
+    . . f . f f f f f f f f f . . .
+    . . . f f b f f f f f b f . . .
+    . . f . f d 1 1 b 1 1 d f . . .
+    . . . . f f 1 f d f 1 f f . . .
+    . . . . . f f f f f f f . . . .
+    . . . . . . f f f f f . . . . .
+    . . . . . f f f f f f f . . . .
+    . . . . f f f f f f f f f . . .
+    . . . . f f f f f f f f f . . .
+    . . . f . f f f f f f f . f . .
+    . . . f . f f f f f f f . f . .
+    . . . . . . f f f f f . . . . .
+    . . . . . . f f . f f . . . . .
+    . . . . . f f f . f f f . . . .
 `
 let p2 = img`
     . . . . . . f f f f . . . . . .
@@ -166,8 +166,9 @@ function invincibility (sprite: Sprite) {
     })
 }
 
-game.onUpdateInterval(500, function () {
-    if (Math.percentChance(25)) {
+game.onUpdateInterval(350, function () {
+    let roll = randint(1, 8)
+    if (roll == 1 || roll == 2) {
         mySprite2 = sprites.create(img`
             . . . . . . . 6 . . . . . . . . 
             . . . . . . 8 6 6 . . . 6 8 . . 
@@ -186,9 +187,8 @@ game.onUpdateInterval(500, function () {
             e e e 2 e e c e c c c . . . . . 
             . c c c c c c c . . . . . . . . 
             `, SpriteKind.Food)
-        mySprite2.setPosition(randint(0, 160), randint(0, 120))
-    } 
-    if (Math.percentChance(25)) {
+    }
+    else if (roll == 3 || roll == 4) {
         mySprite2 = sprites.create(img`
             . . . . . . . e c 7 . . . . . . 
             . . . . e e e c 7 7 e e . . . . 
@@ -207,9 +207,8 @@ game.onUpdateInterval(500, function () {
             . . . 2 2 e e 4 4 4 2 e e . . . 
             . . . . . 2 2 e e e e . . . . . 
             `, SpriteKind.Food)
-        mySprite2.setPosition(randint(0, 160), randint(0, 120))
-    } 
-    if (Math.percentChance(25)) {
+    }
+    else if (roll == 5 || roll == 6) {
         mySprite2 = sprites.create(img`
             4 4 4 . . 4 4 4 4 4 . . . . . . 
             4 5 5 4 4 5 5 5 5 5 4 4 . . . . 
@@ -228,9 +227,8 @@ game.onUpdateInterval(500, function () {
             . . . . c c b 4 4 4 b b 4 5 4 4 
             . . . . . . c c c c c c b b 4 . 
             `, SpriteKind.Food)
-        mySprite2.setPosition(randint(0, 160), randint(0, 120))
     }
-    if (Math.percentChance(15)) {
+    else if (roll == 7) {
         mySprite2 = sprites.create(img`
             . . . . . 3 3 b 3 3 d d 3 3 . . 
             . . . . 3 1 1 d 3 d 1 1 1 1 3 . 
@@ -251,9 +249,8 @@ game.onUpdateInterval(500, function () {
             `, SpriteKind.Enemy)
         mySprite2.lifespan = 5000
         invincibility(mySprite2)
-        mySprite2.setPosition(randint(0, 160), randint(0, 120))
-    } 
-    if (Math.percentChance(15)) {
+    }
+    else {
         mySprite2 = sprites.create(img`
             . . . . . . . . . . . . . . . . 
             . . . . . . f . f . . . . . . . 
@@ -272,9 +269,10 @@ game.onUpdateInterval(500, function () {
             . . f f f . . . . . . . . . . . 
             . . . . . . . . . . . . . . . . 
             `, SpriteKind.Bonus)
-        mySprite2.setPosition(randint(0, 160), randint(0, 120))
     }
+    mySprite2.setPosition(randint(0, 160), randint(0, 120))
 })
+
 
 
 
